@@ -1,0 +1,57 @@
+/******************************************************************************
+
+Name: Hyojeong Lee
+Date: 2024-04-26
+File Name: Longest Substring Without Repeating Characters
+
+Comment:
+Given a string s, find the length of the longest substring without repeating characters.
+
+Example 1:
+Input: s = "abcabcbb"
+Output: 3
+Explanation: The answer is "abc", with the length of 3.
+
+Example 2:
+Input: s = "bbbbb"
+Output: 1
+Explanation: The answer is "b", with the length of 1.
+
+Example 3:
+Input: s = "pwwkew"
+Output: 3
+Explanation: The answer is "wke", with the length of 3.
+Notice that the answer must be a substring, "pwke" is a subsequence and not a substring.
+         
+*******************************************************************************/
+
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        int n=s.length();
+        Set<Character> charset= new HashSet<>();
+        int left=0;
+        int longest=0;
+
+        for(int right = 0 ; right<n; right++)
+        {
+            if(!charset.contains(s.charAt(right)))
+            {
+                charset.add(s.charAt(right));
+                longest=Math.max(longest,(right-left+1));
+            }
+            else{
+                while(charset.contains(s.charAt(right)))
+                {
+                    charset.remove(s.charAt(left)); 
+                    //we have to remove from left.  if not, the only s.charAt(right) removed so we cannot get right result because there is still left string 
+                    left++;
+                }
+                charset.add(s.charAt(right));
+            }
+        }
+
+        return longest;
+    }
+}
+
+/* I got a lot of help from solution section because it was confusing for me. but by following their mechanism, I could understand this */
