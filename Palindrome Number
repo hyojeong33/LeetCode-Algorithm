@@ -1,0 +1,70 @@
+/******************************************************************************
+Name: Hyojeong Lee
+Date: 2024-05-01
+File Name: Palindrome Number
+
+Comment: 
+Given an integer x, return true if x is a palindrome, and false otherwise.
+
+Example 1:
+Input: x = 121
+Output: true
+Explanation: 121 reads as 121 from left to right and from right to left.
+
+Example 2:
+Input: x = -121
+Output: false
+Explanation: From left to right, it reads -121. From right to left, it becomes 121-. Therefore it is not a palindrome.
+
+Example 3:
+Input: x = 10
+Output: false
+Explanation: Reads 01 from right to left. Therefore it is not a palindrome.
+ 
+*******************************************************************************/
+
+//solution
+class Solution {
+    public boolean isPalindrome(int x) {
+        String str = Integer.toString(x);
+        int length=str.length();
+        
+        if(length==1) return true;
+
+        for(int i=0; i< length/2; i++)
+        {
+            if(str.charAt(i)!=str.charAt(length-1-i)) return false;
+        }
+        return true;
+    }
+}
+
+//wrong trial
+class Solution {
+    public boolean isPalindrome(int x) {
+        String str = Integer.toString(x);
+        int length=str.length();
+        Stack<Character> stack= new Stack<>();
+        for(int i=0; i<length; i++)
+        {
+            stack.push(str.charAt(i));
+        }
+
+        String reverse=null;
+        while(!stack.isEmpty())
+        {
+            reverse=reverse + stack.pop();
+        }
+        
+        if(str.equals(reverse))
+        {
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+}
+
+// comment : I thought the way to solve it too difficultly, but it was acctually easier than my thought.
+            I got help from chat gpt. and I totally understood 
