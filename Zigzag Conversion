@@ -1,0 +1,70 @@
+The string "PAYPALISHIRING" is written in a zigzag pattern on a given number of rows like this: (you may want to display this pattern in a fixed font for better legibility)
+
+P   A   H   N
+A P L S I I G
+Y   I   R
+And then read line by line: "PAHNAPLSIIGYIR"
+Write the code that will take a string and make this conversion given a number of rows:
+string convert(string s, int numRows);
+ 
+Example 1:
+Input: s = "PAYPALISHIRING", numRows = 3
+Output: "PAHNAPLSIIGYIR"
+
+Example 2:
+Input: s = "PAYPALISHIRING", numRows = 4
+Output: "PINALSIGYAHRPI"
+
+Explanation:
+P     I    N
+A   L S  I G
+Y A   H R
+P     I
+
+Example 3:
+Input: s = "A", numRows = 1
+Output: "A"
+ 
+Constraints:
+1 <= s.length <= 1000
+s consists of English letters (lower-case and upper-case), ',' and '.'.
+1 <= numRows <= 1000
+
+
+class Solution(object):
+    def convert(self, s, numRows):
+        """
+        :type s: str
+        :type numRows: int
+        :rtype: str
+        """
+        # If numRows is 1, the zigzag pattern is meaningless, so return s as is.
+        if numRows == 1:
+            return s
+
+        # Create a list with numRows empty strings.
+        ans = [''] * numRows
+        
+        # Variables to track the current row index and direction.
+        location = 0
+        goingDown = False # Initial direction is down
+        
+        # Iterate through all characters in the string and add them to the rows.
+        for char in s:
+            ans[location] += char
+
+            # Change direction when the current row reaches the top (0) or bottom (numRows-1).
+            if location == 0 or location == (numRows - 1):
+                goingDown = not goingDown
+            
+            # Move to the next row based on the direction.
+            if goingDown:
+                location += 1
+            else:
+                location -= 1
+        
+        # Join all strings in the list in order to form the final result.
+        return ''.join(ans)
+
+#ㅈWhat I learned;
+.join : add all rows and and one string value
