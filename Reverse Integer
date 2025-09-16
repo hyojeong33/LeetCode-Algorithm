@@ -1,0 +1,45 @@
+Given a signed 32-bit integer x, return x with its digits reversed. If reversing x causes the value to go outside the signed 32-bit integer range [-231, 231 - 1], then return 0.
+
+Assume the environment does not allow you to store 64-bit integers (signed or unsigned).
+
+Example 1:
+Input: x = 123
+Output: 321
+
+Example 2:
+Input: x = -123
+Output: -321
+
+Example 3:
+Input: x = 120
+Output: 21
+ 
+Constraints:
+-231 <= x <= 231 - 1
+
+
+//
+
+class Solution(object):
+    def reverse(self, x):
+        # Define the 32-bit signed integer range
+        MAX_INT = 2**31 - 1
+        MIN_INT = -2**31
+
+        # Handle the negative sign separately
+        is_negative = x < 0
+        if is_negative:
+            x = -x  # Convert to positive for easier reversal
+
+        # Convert to string, reverse, and convert back to integer
+        reversed_x = int(str(x)[::-1])
+
+        # Apply the negative sign back
+        if is_negative:
+            reversed_x = -reversed_x
+        
+        # Check for overflow
+        if reversed_x > MAX_INT or reversed_x < MIN_INT:
+            return 0
+        
+        return reversed_x
