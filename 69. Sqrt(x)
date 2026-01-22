@@ -1,0 +1,56 @@
+/*
+69. Sqrt(x)
+
+Hint
+Given a non-negative integer x, return the square root of x rounded down to the nearest integer. The returned integer should be non-negative as well.
+You must not use any built-in exponent function or operator.
+
+For example, do not use pow(x, 0.5) in c++ or x ** 0.5 in python.
+Example 1:
+Input: x = 4
+Output: 2
+Explanation: The square root of 4 is 2, so we return 2.
+
+Example 2:
+Input: x = 8
+Output: 2
+Explanation: The square root of 8 is 2.82842..., and since we round it down to the nearest integer, 2 is returned.
+*/
+
+class Solution(object):
+    def mySqrt(self, x):
+        """
+        :type x: int
+        :rtype: int
+        """
+        # Base case: if x is 0 or 1, the square root is x itself
+        if x < 2:
+            return x
+
+        # Initialize the search range
+        # The square root of x will always be between 1 and x/2 (for x >= 2)
+        ans = 0
+        left = 1
+        right = x // 2
+
+        while left <= right:
+            # Calculate the middle point to check
+            mid = (left + right) // 2
+            
+            # Check the square of mid
+            if mid * mid == x:
+                # Perfect square found
+                return mid
+            elif mid * mid < x:
+                # mid is a potential candidate, but we look for a larger integer
+                ans = mid
+                left = mid + 1
+            else:
+                # mid squared is too large, reduce the search range to the left
+                right = mid - 1
+        
+        # Return the floor value of the square root stored in ans
+        return ans
+
+
+
