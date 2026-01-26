@@ -1,0 +1,41 @@
+/*
+83. Remove Duplicates from Sorted List
+Given the head of a sorted linked list, delete all duplicates such that each element appears only once. Return the linked list sorted as well.
+*/
+
+
+# Definition for singly-linked list.
+# class ListNode(object):
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+
+class Solution(object):
+    def deleteDuplicates(self, head):
+        """
+        :type head: Optional[ListNode]
+        :rtype: Optional[ListNode]
+        """
+        # Save the starting point of the list to return it later.
+        # Since 'head' will move during traversal, we need a reference to the start.
+        point = head
+
+        # Continue as long as the current node and the next node are not None.
+        while head and head.next:
+            # If the current node's value is the same as the next node's value
+            if head.val == head.next.val:
+                # Skip the next node by linking current node to the node after the next.
+                head.next = head.next.next
+            else:
+                # If values are different, move the 'head' pointer to the next node.
+                head = head.next
+
+        # Return the original head of the list.
+        return point
+/*
+Expression	Meaning	Context
+head.val	The value stored in the current node.	Accessing data
+head.next	The reference/pointer to the next node.	Moving or linking
+head.next.next	The node two positions ahead.	Skipping a node
+while head:	Loop until the pointer reaches the end (None).	Traversal
+*/
